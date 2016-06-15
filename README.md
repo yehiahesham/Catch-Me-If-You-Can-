@@ -50,5 +50,44 @@ We are planning to use two i-Creates, two robotic arms, a Dagu, and a camera. Th
 All of our project components will be synced together to act more realistically and effectively. We believe that the Server-Client Architecture is best suited for our project. We will have a PC or laptop acting as a centralized server, running the main code, and initiating  and controlling everything. The Camera Client should stream the video to the server where it is processed and analyzed. On the other hand, the Dagu car should wait till the ignition signal to go and catch a certain vehicle with a given speed and location, based on previous and continuous calculations did through the server to optimize the dagu car. Moreover, the iCreates robots and the Arms installed on them should also wait for the signal to either move or throw an object, which will be treated as if  trash  was thrown out of a car. At this point, the object and the responsible iCreate robot  should be already detected by the camera and the Dagu car will start the chase. Our Communication protocol will be a wireless TCP connections. Below is the System Architecture figure of  our project.
   
 
+#Optimizations:
+
+
+❖	The shift from synchronous to asynchronous. 
+
+
+In order to overcome errors caused by the default synchronous behavior of the send() and recv() functions implemented in the client and server programs. We altered the functions to enable us to send commands asynchronously, allowing several commands to be received separately if sent one after the other, and then processed with enough time in between. This also allowed us to remove the sleeps included in each Dagu movement function.
+
+
+❖	Vision code
+
+The HSV color ranges differ from one setting to another, and due to the fact that we changed settings several times we needed to adjust the color ranges accordingly. We also varied the number of frames processed in order to maximize performance.
+
+
+❖	Removing all sleep functions associated with the Dagu.
+
+
+This greatly improved the speed of the Dagu’s movements.
+
+#Challenges:
+
+❖	Adjusting the ranges of the colours detected. 
+
+❖	Finding the minimum number of camera frames taken per second for the system to function.
+
+❖	Powering Panda boards.
+
+❖	Servers with clients.
+
+❖	Logic shifter.
+
+
+
+#Operation:
+
+To start the simulation, after connecting all the hardware interfaces and connecting all the boards to the same wireless network. The main program connects to the programs running as daemon processes on each of the other units.
+
+
+
 #Conclusion 
 To conclude, we hope that through our project we have been able to demonstrate the system’s ability to detect and then direct the police car with a reasonable reaction time to capture efficiently and autonomously the vehicles that have littered, providing a miniature but viable model for future implementations.
